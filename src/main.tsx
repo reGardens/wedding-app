@@ -1,37 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './pages/App.tsx'
 import {
   createBrowserRouter,
-  // createRoutesFromElements,
-  // Route,
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./error-page.tsx";
+import Home from './pages/Home/index.tsx';
 
 const router = createBrowserRouter(
-  // createRoutesFromElements(
-  //   <Route
-  //   path="teams/:teamId"
-  // the matching param will be available to the loader
-  // loader={({ params }) => {
-  //   console.log(params.teamId); // "hotspur"
-  // }}
-  // and the action
-  //   action={({ params }) => { }}
-  //   errorElement={<ErrorBoundary />}
-  // element={<App />}
-  // />
-  // )
   [
     {
       path: "/",
-      element: <App />,
+      element: <Home />,
       errorElement: <ErrorPage />,
-    },
-    {
-      path: "/:teamId",
-      element: <App />,
     },
   ]
 );
