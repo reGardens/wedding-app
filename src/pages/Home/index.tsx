@@ -2,6 +2,9 @@ import CoverLetter from "../../components/CoverLetter"
 import Layout from "../../components/Layout"
 import dummyAvatar from "../../assets/image/avatar.webp"
 import Countdown, { CountdownRenderProps } from 'react-countdown';
+import gifMusic from '../../../public/gif/music.gif'
+import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   // set target time
@@ -26,9 +29,39 @@ export default function Home() {
     }
   };
 
+  // handle music
+  const [music, setMusic] = useState<boolean>(true)
+  const audio = new Audio('../../../public/Mp3/song.mp3');
+
+  // useEffect(() => {
+
+  //   audio.addEventListener('ended', handleEnded);
+
+  //   return () => {
+  //     audio.removeEventListener('ended', handleEnded);
+  //   };
+  // }, [audio]);
+  // ``
+  const handleMusic = () => {
+    // setMusic(music)
+    const playMusic = localStorage.getItem("play");
+    if (playMusic !== null && playMusic === "true") {
+      audio.pause();
+      localStorage.setItem('play', JSON.stringify(false));
+    } else {
+      audio.play();
+    }
+    // setMusic(!music);
+    // if (!music) {
+    //     audio.play();
+    // } else {
+    //     audio.pause();
+    // }
+  }
+
   return (
     <Layout>
-      <main className="bg-header max-w-screen-sm h-screen mx-auto relative">
+      <main className="bg-header max-w-screen-sm h-screen mx-auto relative overflow-hidden">
         <CoverLetter />
         <div className="w-full h-full absolute top-0 left-0">
           <img src={dummyAvatar} alt="" className="w-full h-full object-cover" />
@@ -41,6 +74,15 @@ export default function Home() {
           >
           </Countdown>
         </div>
+
+        {/* play button music */}
+        <Button sx={{
+          marginLeft: '15px'
+        }}
+          onClick={handleMusic}
+        >
+          <img src={gifMusic} alt="" className="fixed top-1 z-[888] w-14 md:w-20 md:h-20 object-contain drop-shadow-2xl" />
+        </Button>
       </main>
     </Layout>
   )

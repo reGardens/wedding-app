@@ -2,14 +2,30 @@ import Layout from "../Layout";
 import dummyAvatar from "../../assets/image/avatar.webp"
 import { Avatar, Button } from "@mui/material"
 import gsap from "gsap";
+import { useEffect, useMemo, useState } from "react";
+import { Music } from "../Music";
 
-export default function CoverLetter() {
+interface MusicProps {
+    url: string;
+}
+
+export default function CoverLetter({ url }: MusicProps) {
     // get query parameter url
     const queryParameters = new URLSearchParams(window.location.search)
     const to = queryParameters.get("to")
     const and = queryParameters.get("and")
 
+    const [play, setPlay] = useState(false)
+    // const audio = useMemo(() => {
+    //     return new Audio('../../../public/Mp3/song.mp3');
+    // }, [url]);
+
+    useEffect(() => {
+        localStorage.setItem('play', JSON.stringify(play));
+    }, []);
+
     const handleCoverLetter = () => {
+        // handle animation
         gsap.to(".cover", {
             rotation: -50,
             x: '-100%',
@@ -17,7 +33,17 @@ export default function CoverLetter() {
             opacity: 0,
             display: 'none'
         });
+
+        // handle button play
+        const playMusic = localStorage.getItem("play");
+        if (playMusic !== null && playMusic === "false") {
+            Music.play();
+            localStorage.setItem('play', JSON.stringify(true));
+        } else {
+            Music.pause();
+        }
     }
+
     return (
         <Layout>
             <div className="cover max-w-screen-sm h-screen absolute top-0 left-0 z-[999]">
