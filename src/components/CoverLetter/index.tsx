@@ -3,7 +3,8 @@ import dummyAvatar from "../../assets/image/avatar.webp"
 import { Avatar, Button } from "@mui/material"
 import gsap from "gsap";
 import { useEffect, useMemo, useState } from "react";
-import { Music } from "../Music";
+import gifMusic from '../../../public/gif/music.gif'
+import gifPause from '../../../public/icon/pause-button.webp'
 
 interface MusicProps {
     url: string;
@@ -16,9 +17,9 @@ export default function CoverLetter({ url }: MusicProps) {
     const and = queryParameters.get("and")
 
     const [play, setPlay] = useState(false)
-    // const audio = useMemo(() => {
-    //     return new Audio('../../../public/Mp3/song.mp3');
-    // }, [url]);
+    const audio = useMemo(() => {
+        return new Audio('../../../public/Mp3/test.mp3');
+    }, [url]);
 
     useEffect(() => {
         localStorage.setItem('play', JSON.stringify(play));
@@ -37,10 +38,16 @@ export default function CoverLetter({ url }: MusicProps) {
         // handle button play
         const playMusic = localStorage.getItem("play");
         if (playMusic !== null && playMusic === "false") {
-            Music.play();
+            audio.play();
+            audio.volume = 0.3;
             localStorage.setItem('play', JSON.stringify(true));
+            setPlay(true)
+        } else if (playMusic !== null && playMusic === "true") {
+            audio.pause();
+            localStorage.setItem('play', JSON.stringify(false));
+            setPlay(false)
         } else {
-            Music.pause();
+            audio.pause();
         }
     }
 
@@ -77,6 +84,27 @@ export default function CoverLetter({ url }: MusicProps) {
                     </Button>
                 </div>
             </div>
+
+            {/* play button music */}
+            {localStorage.getItem("play") !== null && localStorage.getItem("play") === "true" ?
+                <Button
+                    sx={{
+                        marginLeft: '15px'
+                    }}
+                    onClick={handleCoverLetter}
+                >
+                    <img src={gifMusic} alt="" className="fixed top-1 z-[888] w-14 md:w-20 md:h-20 object-contain drop-shadow-2xl" />
+                </Button>
+                :
+                <Button
+                    sx={{
+                        marginLeft: '15px'
+                    }}
+                    onClick={handleCoverLetter}
+                >
+                    <img src={gifPause} alt="" className="fixed top-1 z-[888] w-14 md:w-16 md:h-20 object-contain drop-shadow-2xl" />
+                </Button>
+            }
         </Layout>
     )
 }
