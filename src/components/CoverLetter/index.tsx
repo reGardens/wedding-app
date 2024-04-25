@@ -40,6 +40,7 @@ export default function CoverLetter({ url }: MusicProps) {
         if (playMusic !== null && playMusic === "false") {
             audio.play();
             audio.volume = 0.3;
+            audio.loop = true;
             localStorage.setItem('play', JSON.stringify(true));
             setPlay(true)
         } else if (playMusic !== null && playMusic === "true") {
@@ -88,18 +89,14 @@ export default function CoverLetter({ url }: MusicProps) {
             {/* play button music */}
             {localStorage.getItem("play") !== null && localStorage.getItem("play") === "true" ?
                 <Button
-                    sx={{
-                        marginLeft: '15px'
-                    }}
+                    className="ml-[10px] md:!ml-[15px]"
                     onClick={handleCoverLetter}
                 >
                     <img src={gifMusic} alt="" className="fixed top-1 z-[888] w-14 md:w-20 md:h-20 object-contain drop-shadow-2xl" />
                 </Button>
                 :
                 <Button
-                    sx={{
-                        marginLeft: '15px'
-                    }}
+                    className="ml-[10px] md:!ml-[15px]"
                     onClick={handleCoverLetter}
                 >
                     <img src={gifPause} alt="" className="fixed top-1 z-[888] w-14 md:w-16 md:h-20 object-contain drop-shadow-2xl" />
