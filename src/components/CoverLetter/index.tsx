@@ -23,7 +23,7 @@ export default function CoverLetter() {
             <div className="cover max-w-screen-sm h-screen absolute top-0 left-0 z-[999]">
                 <img src={dummyAvatar} alt="" loading="lazy" srcSet="" className="max-w-screen-sm h-screen absolute top-0 left-0 w-full object-cover" />
                 <div className="cover max-w-screen-sm h-screen mx-auto text-white dark:text-white text-center overflow-y-auto backdrop-blur-xl bg-white/30 dark:bg-black/30 p-4 lg:p-10">
-                    <p className="font-bold lg:text-lg mb-5">Undangan Pernikahan</p>
+                    <p className="font-bold lg:text-lg mb-5 tracking-widest uppercase">Undangan Pernikahan</p>
                     <div className="">
                         <Avatar
                             alt="Remy Sharp"
