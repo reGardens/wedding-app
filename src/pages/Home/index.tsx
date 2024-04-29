@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <Layout>
       <main className="bg-header max-w-screen-sm h-screen mx-auto relative overflow-hidden">
-        <CoverLetter url="" />
+        <CoverLetter />
         <div className="w-full h-full absolute top-0 left-0">
           <img src={dummyAvatar} alt="" className="w-full h-full object-cover" />
         </div>
