@@ -3,14 +3,14 @@ import dummyAvatar from "../../assets/image/avatar.webp"
 import { Avatar, Button } from "@mui/material"
 import gsap from "gsap";
 import { useEffect, useMemo, useState } from "react";
-import gifMusic from '../../../public/gif/music.gif'
-import gifPause from '../../../public/icon/pause-button.webp'
+import gifMusic from '/gif/music.gif'
+import gifPause from '/icon/pause-button.webp'
 
-interface MusicProps {
-    url: string;
-}
+// interface MusicProps {
+//     url: string;
+// }
 
-export default function CoverLetter({ url }: MusicProps) {
+export default function CoverLetter() {
     // get query parameter url
     const queryParameters = new URLSearchParams(window.location.search)
     const to = queryParameters.get("to")
@@ -18,12 +18,12 @@ export default function CoverLetter({ url }: MusicProps) {
 
     const [play, setPlay] = useState(false)
     const audio = useMemo(() => {
-        return new Audio('../../../public/Mp3/test.mp3');
-    }, [url]);
+        return new Audio('/Mp3/test.mp3');
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('play', JSON.stringify(play));
-    }, []);
+    }, [play]);
 
     const handleCoverLetter = () => {
         // handle animation

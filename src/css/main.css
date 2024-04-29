@@ -33,6 +33,7 @@ html {
 }
 /* ------ */
 
+/* gradient to transparent header home */
 .bg-header::after {
   content: "";
   width: 100%;
@@ -46,3 +47,4 @@ html {
     rgba(255, 0, 0, 0)
   );
 }
+/* ------ */
