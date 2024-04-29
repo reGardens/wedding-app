@@ -5,14 +5,14 @@ import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bgTheBride from "/Image/bg-about-black.jpeg";
+import bgTheBride from "../../../public/Image/bg-about-black.jpeg";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import defaultImage from "/Default/default-image.png";
+import defaultImage from "../../../public/Default/default-image.png";
 import { Link } from "react-router-dom";
 import { Divider } from "@mui/material";
 
