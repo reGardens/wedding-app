@@ -41,8 +41,6 @@ export default function CoverLetter() {
             display: 'none'
         });
         gsap.to(".modal", {
-            // rotation: -50,
-            // x: '-100%',
             duration: 1,
             opacity: 0,
             display: 'none'
@@ -120,7 +118,7 @@ export default function CoverLetter() {
                             className=""
                             onClick={handleCoverLetter}
                         >
-                            <img src={gifPause} alt="" className="w-14 md:w-16 md:h-20 object-contain drop-shadow-2xl" />
+                            <img src={gifPause} alt="" className="w-14 md:w-16 md:h-20 p-2 object-contain drop-shadow-2xl" />
                         </Button>
                     }
                 </div>

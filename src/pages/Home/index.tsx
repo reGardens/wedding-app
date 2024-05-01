@@ -5,7 +5,7 @@ import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bgTheBride from "../../assets/image/bg-about-black.jpeg";
+// import bgTheBride from "../../assets/image/bg-about-black.jpeg";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -31,7 +31,7 @@ export default function Home() {
       const formattedDays = days < 10 ? `0${days}` : days;
       // Render the countdown with custom format
       return (
-        <div className="grid grid-cols-4 gap-3 backdrop-blur-xl bg-white/30 dark:bg-black/30 py-2 px-4 rounded-lg">
+        <div className="grid grid-cols-4 gap-3 backdrop-blur-xl bg-gradient-to-br from-[#32CD32] to-[#C8A2C8] text-black py-2 px-4 rounded-lg">
           <div><span className="text-2xl md:text-3xl">{formattedDays}</span> <br /> <span>Hari</span></div>
           <div><span className="text-2xl md:text-3xl">{hours}</span> <br /> <span>Jam</span></div>
           <div><span className="text-2xl md:text-3xl">{minutes}</span> <br /> <span>Menit</span></div>
@@ -42,6 +42,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // section animation doa
     const doa = gsap.timeline({
       scrollTrigger: {
         trigger: '.doa',
@@ -51,6 +52,24 @@ export default function Home() {
       }
     });
     doa.to(".doa div", { y: 0, duration: 1.8, ease: "back.out(1.1)", opacity: 1 });
+
+    // section animation the bride
+    const wrapperBride = document.querySelectorAll('.card-wrapper');
+    wrapperBride.forEach(el => {
+      const bride = el.querySelector('.card');
+      if (bride) {
+        const card = gsap.timeline({
+          scrollTrigger: {
+            trigger: bride,
+            start: "top center",
+            end: "+=500 center",
+            toggleActions: "play none none reverse",
+            // markers: true,
+          }
+        });
+        card.to(bride, { y: 0, duration: 1.8, ease: "back.out(1.1)", opacity: 1, rotate: 0 });
+      }
+    });
   }, []);
 
   return (
@@ -81,59 +100,66 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-screen-sm mx-auto relative overflow-hidden py-4 lg:py-10 px-4">
-        <img src={bgTheBride} alt="" srcSet="" className="absolute top-0 left-0 w-full h-full object-cover opacity-75 -z-10" />
+      <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
         <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5">THE BRIDE</p>
 
-        <Card sx={{}} className="!backdrop-blur-md !bg-[#32CD32]/30">
-          <CardMedia
-            sx={{ height: 340 }}
-            image={defaultImage}
-            title="green iguana"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
-              Personalia
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PUTRO PERTAMA DARI:
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Bpk. ............... dan Ibu. ............... <br />
-              Alamat ...............
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">
-              <Link to="test">Instagram</Link>
-            </Button>
-          </CardActions>
-        </Card>
+        <div className="card-wrapper">
+          <div className="card translate-y-10 opacity-0 rotate-90 origin-top-left">
+            <Card sx={{}} className="!backdrop-blur-md !bg-[#32CD32]/30">
+              <CardMedia
+                sx={{ height: 340 }}
+                image={defaultImage}
+                title="green lime"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
+                  Personalia
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  PUTRO PERTAMA DARI:
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Bpk. ............... dan Ibu. ............... <br />
+                  Alamat ...............
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">
+                  <Link to="test">Instagram</Link>
+                </Button>
+              </CardActions>
+            </Card>
+          </div>
+        </div>
         <Divider orientation="vertical" variant="middle" flexItem />
-        <Card sx={{}} className="!backdrop-blur-md !bg-[#800080]/30">
-          <CardMedia
-            sx={{ height: 340 }}
-            image={defaultImage}
-            title="green iguana"
-          />
-          <CardContent sx={{ textAlign: 'right' }}>
-            <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
-              Personalia
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PUTRO PERTAMA DARI:
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Bpk. ............... dan Ibu. ............... <br />
-              Alamat ...............
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ float: 'right' }}>
-            <Button size="small">
-              <Link to="test">Instagram</Link>
-            </Button>
-          </CardActions>
-        </Card>
+        <div className="card-wrapper">
+          <div className="card translate-y-10 opacity-0 -rotate-90 origin-top-right">
+            <Card sx={{}} className="!card !backdrop-blur-md !bg-[#C8A2C8]/30">
+              <CardMedia
+                sx={{ height: 340 }}
+                image={defaultImage}
+                title="purple lilac"
+              />
+              <CardContent sx={{ textAlign: 'right' }}>
+                <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
+                  Personalia
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  PUTRO PERTAMA DARI:
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Bpk. ............... dan Ibu. ............... <br />
+                  Alamat ...............
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ float: 'right' }}>
+                <Button size="small">
+                  <Link to="test">Instagram</Link>
+                </Button>
+              </CardActions>
+            </Card>
+          </div>
+        </div>
       </section>
     </Layout>
   )
