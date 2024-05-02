@@ -25,7 +25,7 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <ThemeProvider theme={theme}>
             <div className="w-full h-full">
-                <img src={backgroundDummy} alt="" loading="lazy" srcSet="" className="-z-10 fixed top-0 left-0 md:h-[100vh] w-full object-cover" />
+                <img src={backgroundDummy} alt="" loading="lazy" srcSet="" className="-z-10 fixed top-0 left-0 md:h-screen bg-center w-full object-cover" />
             </div>
             <CssBaseline />
             {children}
