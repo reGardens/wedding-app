@@ -2,10 +2,9 @@ import CoverLetter from "../../components/CoverLetter"
 import Layout from "../../components/Layout"
 import dummyAvatar from "../../assets/image/avatar.webp"
 import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import bgTheBride from "../../assets/image/bg-about-black.jpeg";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,6 +14,14 @@ import Typography from '@mui/material/Typography';
 import defaultImage from "../../assets/image/Default/default-image.png";
 import { Link } from "react-router-dom";
 import { Divider } from "@mui/material";
+
+interface dataType {
+  img: string;
+  name: string;
+  col: number;
+  row: number;
+  // customClass: string;
+}
 
 export default function Home() {
   gsap.registerPlugin(ScrollTrigger)
@@ -40,6 +47,21 @@ export default function Home() {
       );
     }
   };
+
+  // get dataImage
+  const [dataThumb, setDataThumb] = useState([])
+  const getDataImage = () => {
+    fetch('dataThumb.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then(function (res) {
+      return res.json();
+    }).then(function (json) {
+      setDataThumb(json)
+    });
+  }
 
   useEffect(() => {
     // section animation doa
@@ -70,6 +92,8 @@ export default function Home() {
         card.to(bride, { y: 0, duration: 1.8, ease: "back.out(1.1)", opacity: 1, rotate: 0 });
       }
     });
+
+    getDataImage();
   }, []);
 
   return (
@@ -101,7 +125,7 @@ export default function Home() {
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
-        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5">THE BRIDE</p>
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5">PENGANTIN</p>
 
         <div className="card-wrapper">
           <div className="card translate-y-10 opacity-0 rotate-90 origin-top-left">
@@ -131,7 +155,7 @@ export default function Home() {
             </Card>
           </div>
         </div>
-        <Divider orientation="vertical" variant="middle" flexItem />
+        <Divider orientation="vertical" variant="middle" />
         <div className="card-wrapper">
           <div className="card translate-y-10 opacity-0 -rotate-90 origin-top-right">
             <Card sx={{}} className="!card !backdrop-blur-md !bg-[#C8A2C8]/30">
@@ -159,6 +183,20 @@ export default function Home() {
               </CardActions>
             </Card>
           </div>
+        </div>
+      </section>
+
+      <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">Moments</p>
+
+        <div className="grid grid-cols-7 grid-rows-5 gap-1.5">
+          {dataThumb && dataThumb.map((res: dataType, index: number) => {
+            return (
+              <div className={`col-span-${res.col} row-span-${res.row}`} key={index}>
+                <img src={res.img} alt={res.name} className={`object-cover h-full`} />
+              </div>
+            )
+          })}
         </div>
       </section>
     </Layout>
