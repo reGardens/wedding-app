@@ -1,31 +1,39 @@
-import CoverLetter from "../../components/CoverLetter"
-import Layout from "../../components/Layout"
-import dummyAvatar from "../../assets/image/avatar.webp"
-import Countdown, { CountdownRenderProps } from 'react-countdown';
+import CoverLetter from "../../components/CoverLetter";
+import Layout from "../../components/Layout";
+import jumbotron from "../../assets/image/jumbotron.webp";
+import Countdown, { CountdownRenderProps } from "react-countdown";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import defaultImage from "../../assets/image/Default/default-image.png";
 import { Link } from "react-router-dom";
 import { Divider, FilledInput } from "@mui/material";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
 // import FormLabel from '@mui/material/FormLabel';
 // import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 // import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-import Input from '@mui/material/Input';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
+import Input from "@mui/material/Input";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormHelperText from "@mui/material/FormHelperText";
+import {
+  DaunBottomLeft,
+  DaunBottomRight,
+  DaunTopLeft,
+  DauntTopRight,
+  DaunTopLeftAmplop,
+} from "../../components/Flower.js";
+import bgEnvelope from "../../assets/image/bg-envelope.webp";
 
 interface dataType {
   img: string;
@@ -36,12 +44,18 @@ interface dataType {
 }
 
 export default function Home() {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 
   // set target time
-  const countDownTimer = new Date('2025-04-26T00:00:00');
+  const countDownTimer = new Date("2025-04-26T00:00:00");
   // start custom style date
-  const renderer = ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
+  const renderer = ({
+    days,
+    hours,
+    minutes,
+    seconds,
+    completed,
+  }: CountdownRenderProps) => {
     if (completed) {
       // Render completed state
       return <span>Acara telah selesai!</span>;
@@ -50,33 +64,47 @@ export default function Home() {
       const formattedDays = days < 10 ? `0${days}` : days;
       // Render the countdown with custom format
       return (
-        <div className="grid grid-cols-4 gap-3 backdrop-blur-xl bg-gradient-to-br from-[#32CD32] to-[#C8A2C8] text-black py-2 px-4 rounded-lg">
-          <div><span className="text-2xl md:text-3xl">{formattedDays}</span> <br /> <span>Hari</span></div>
-          <div><span className="text-2xl md:text-3xl">{hours}</span> <br /> <span>Jam</span></div>
-          <div><span className="text-2xl md:text-3xl">{minutes}</span> <br /> <span>Menit</span></div>
-          <div><span className="text-2xl md:text-3xl">{seconds}</span> <br /> <span>Detik</span></div>
+        <div className="grid grid-cols-4 gap-3 w-[20rem] mx-auto backdrop-blur-xl bg-gradient-to-br from-[#6A89BB] to-[#7E60BF] shadow-xl from-10%  text-black py-2 px-4 rounded-lg">
+          <div>
+            <span className="text-2xl md:text-3xl">{formattedDays}</span> <br />{" "}
+            <span>Hari</span>
+          </div>
+          <div>
+            <span className="text-2xl md:text-3xl">{hours}</span> <br />{" "}
+            <span>Jam</span>
+          </div>
+          <div>
+            <span className="text-2xl md:text-3xl">{minutes}</span> <br />{" "}
+            <span>Menit</span>
+          </div>
+          <div>
+            <span className="text-2xl md:text-3xl">{seconds}</span> <br />{" "}
+            <span>Detik</span>
+          </div>
         </div>
       );
     }
   };
 
   // get dataImage
-  const [dataThumb, setDataThumb] = useState([])
+  const [dataThumb, setDataThumb] = useState([]);
   const getDataImage = () => {
-    fetch('thumbnail.json', {
+    fetch("thumbnail.json", {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }).then(function (res) {
-      return res.json();
-    }).then(function (json) {
-      setDataThumb(json)
-    });
-  }
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (json) {
+        setDataThumb(json);
+      });
+  };
 
   // konfirmasi kehadiran
-  const [value, setValue] = useState('female');
+  const [value, setValue] = useState("female");
   const handleRadioButton = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
@@ -100,35 +128,37 @@ export default function Home() {
   const copyText = () => {
     // Get the text field
     // var copyText = document.getElementById("myInput");
-
     // Select the text field
     // copyText.select();
     // copyText.setSelectionRange(0, 99999); // For mobile devices
-
     // Copy the text inside the text field
     // navigator.clipboard.writeText(copyText.value);
-
     // Alert the copied text
     // alert("Copied the text: " + copyText.value);
-  }
+  };
   // ------
 
   useEffect(() => {
     // section animation doa
     const doa = gsap.timeline({
       scrollTrigger: {
-        trigger: '.doa',
+        trigger: ".doa",
         start: "top center",
         end: "bottom center",
         toggleActions: "play none none reverse",
-      }
+      },
     });
-    doa.to(".doa div", { y: 0, duration: 1.8, ease: "back.out(1.1)", opacity: 1 });
+    doa.to(".doa div", {
+      y: 0,
+      duration: 1.8,
+      ease: "back.out(1.1)",
+      opacity: 1,
+    });
 
     // section animation the bride
-    const wrapperBride = document.querySelectorAll('.card-wrapper');
-    wrapperBride.forEach(el => {
-      const bride = el.querySelector('.card');
+    const wrapperBride = document.querySelectorAll(".card-wrapper");
+    wrapperBride.forEach((el) => {
+      const bride = el.querySelector(".card");
       if (bride) {
         const card = gsap.timeline({
           scrollTrigger: {
@@ -137,9 +167,15 @@ export default function Home() {
             end: "+=500 center",
             toggleActions: "play none none reverse",
             // markers: true,
-          }
+          },
         });
-        card.to(bride, { y: 0, duration: 1.8, ease: "back.out(1.1)", opacity: 1, rotate: 0 });
+        card.to(bride, {
+          y: 0,
+          duration: 1.8,
+          ease: "back.out(1.1)",
+          opacity: 1,
+          rotate: 0,
+        });
       }
     });
 
@@ -166,17 +202,31 @@ export default function Home() {
     <Layout>
       <CoverLetter />
 
-      <main className="bg-header max-w-screen-sm h-screen mx-auto relative overflow-hidden">
-        <div className="w-full h-full absolute top-0 left-0">
-          <img src={dummyAvatar} alt="" className="w-full h-full object-cover" />
+      <main className="bg-header max-w-screen-sm h-screen mx-auto !relative overflow-hidden">
+        <DaunTopLeftAmplop />
+        <DauntTopRight />
+        <DaunBottomLeft />
+        <DaunBottomRight />
+
+        <div className="w-full h-full z-10 absolute top-0 left-0">
+          <img src={jumbotron} alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="text-center py-4 lg:py-10 absolute bottom-0 w-full grid justify-center z-10">
-          <p className="drop-shadow-2xl font-extrabold text-4xl lg:text-5xl font-greatVibes tracking-widest relative">Personalia <br /> & <br /> Personalia</p> <br />
-          <Countdown
-            date={countDownTimer}
-            renderer={renderer}
-          >
-          </Countdown>
+        <div className="text-center py-4 lg:py-10 absolute bottom-0 w-full grid justify-center z-30">
+          <p className="drop-shadow-2xl font-extrabold text-2xl lg:text-5xl font-greatVibes tracking-widest relative">
+            <span>Rita Karina</span> <br />
+          </p>
+          <span className="opacity-70">Bapak Tarsai & Ibu Sukaesih</span>
+          <p className="drop-shadow-2xl font-extrabold text-2xl lg:text-5xl font-greatVibes tracking-widest relative leading-none mt-3">
+            &
+          </p>
+          <p className="drop-shadow-2xl font-extrabold text-2xl lg:text-5xl font-greatVibes tracking-widest relative">
+            <span>Reza Bagus Pratama</span> <br />
+          </p>
+          <span className="opacity-70 drop-shadow-xl">Bapak Rizki Widiani & Ibu Sumarmi</span> <br />
+          {/* <Countdown date={countDownTimer} renderer={renderer}></Countdown> */}
+        </div>
+        <div className="absolute z-20 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#7E60BF] to-transparent from-30%">
+          &nbsp;
         </div>
       </main>
 
@@ -184,14 +234,29 @@ export default function Home() {
         <div className="translate-y-10 opacity-0">
           <p className="text-lg mb-3"> QS. Ar-Rum Ayat 21 </p>
           <p className="">
-            <span className="text-xl py-5">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</span> <br />
-            <span className="text-base"> "Dan di antara tanda-tanda (kebesaran)-Nya adalah Dia menciptakan sekutu bagimu dari jenismu sendiri, agar kamu condong dan merasa tenteram terhadapnya, dan Dia menciptakan di antara kamu perasaan cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi orang-orang yang berpikir."</span>
+            <span className="text-xl py-5">
+              وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا
+              لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً
+              وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
+            </span>{" "}
+            <br />
+            <span className="text-base">
+              {" "}
+              "Dan di antara tanda-tanda (kebesaran)-Nya adalah Dia menciptakan
+              sekutu bagimu dari jenismu sendiri, agar kamu condong dan merasa
+              tenteram terhadapnya, dan Dia menciptakan di antara kamu perasaan
+              cinta dan kasih sayang. Sesungguhnya pada yang demikian itu
+              benar-benar terdapat tanda-tanda (kebesaran Allah) bagi
+              orang-orang yang berpikir."
+            </span>
           </p>
         </div>
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
-        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5">PENGANTIN</p>
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5">
+          PENGANTIN
+        </p>
 
         <div className="card-wrapper">
           <div className="card translate-y-10 opacity-0 rotate-90 origin-top-left">
@@ -202,7 +267,12 @@ export default function Home() {
                 title="green lime"
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  className="!font-greatVibes !tracking-[5px] !text-4xl"
+                >
                   Personalia
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -230,8 +300,13 @@ export default function Home() {
                 image={defaultImage}
                 title="purple lilac"
               />
-              <CardContent sx={{ textAlign: 'right' }}>
-                <Typography gutterBottom variant="h5" component="div" className="!font-greatVibes !tracking-[5px] !text-4xl">
+              <CardContent sx={{ textAlign: "right" }}>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  className="!font-greatVibes !tracking-[5px] !text-4xl"
+                >
                   Personalia
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -242,7 +317,7 @@ export default function Home() {
                   Alamat ...............
                 </Typography>
               </CardContent>
-              <CardActions sx={{ float: 'right' }}>
+              <CardActions sx={{ float: "right" }}>
                 <Button size="small">
                   <Link to="test">Instagram</Link>
                 </Button>
@@ -253,52 +328,75 @@ export default function Home() {
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
-        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">Moments</p>
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">
+          Moments
+        </p>
 
         <div className="grid grid-cols-7 grid-rows-4 gap-1.5 backdrop-blur-sm bg-white">
-          {dataThumb && dataThumb.map((res: dataType, index: number) => {
-            return (
-              <div className={`col-span-${res.col} row-span-${res.row}`} key={index}>
-                <img src={res.img} alt={res.name} className={`object-cover h-full`} />
-              </div>
-            )
-          })}
+          {dataThumb &&
+            dataThumb.map((res: dataType, index: number) => {
+              return (
+                <div
+                  className={`col-span-${res.col} row-span-${res.row}`}
+                  key={index}
+                >
+                  <img
+                    src={res.img}
+                    alt={res.name}
+                    className={`object-cover h-full`}
+                  />
+                </div>
+              );
+            })}
         </div>
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4 text-center">
         <p className="text-2xl uppercase">akad nikah</p>
-        <p className="py-3 text-xl leading-none">Lorem, 51 Lorem 1212 <br /> pukul 08:00 WIB - 09:00 WIB</p>
+        <p className="py-3 text-xl leading-none">
+          Lorem, 51 Lorem 1212 <br /> pukul 08:00 WIB - 09:00 WIB
+        </p>
         <p className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae natus minima corrupti, ullam beatae repellat iure
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+          natus minima corrupti, ullam beatae repellat iure
         </p>
 
         <br />
 
         <p className="text-2xl uppercase">resepsi</p>
-        <p className="py-3 text-xl leading-none">Lorem, 51 Lorem 1212 <br /> pukul 08:00 WIB - 09:00 WIB</p>
+        <p className="py-3 text-xl leading-none">
+          Lorem, 51 Lorem 1212 <br /> pukul 08:00 WIB - 09:00 WIB
+        </p>
         <p className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae natus minima corrupti, ullam beatae repellat iure
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+          natus minima corrupti, ullam beatae repellat iure
         </p>
 
         <br />
 
         <Button variant="contained" sx={{ fontWeight: "bold" }}>
           {/* open google calendar > create event > save > copy link url */}
-          <Link to={"https://calendar.google.com/calendar/u/0/r/eventedit/MWQ3bDI5OWZ1dTZkMWdpbDlzamR2OHJrdnIgcmV6emFiYWd1cy5yYkBt"} target="_blank">
+          <Link
+            to={
+              "https://calendar.google.com/calendar/u/0/r/eventedit/MWQ3bDI5OWZ1dTZkMWdpbDlzamR2OHJrdnIgcmV6emFiYWd1cy5yYkBt"
+            }
+            target="_blank"
+          >
             simpan acara ke kalender
           </Link>
         </Button>
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
-        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">konfirmasi kehadiran</p>
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">
+          konfirmasi kehadiran
+        </p>
 
         <form className="">
           <Box
             component="form"
             sx={{
-              '& .MuiTextField-root': { width: '100%' },
+              "& .MuiTextField-root": { width: "100%" },
             }}
             noValidate
             autoComplete="off"
@@ -321,13 +419,23 @@ export default function Home() {
                 value={value}
                 onChange={handleRadioButton}
               >
-                <FormControlLabel value="iya" control={<Radio />} label="Iya, saya akan datang" />
-                <FormControlLabel value="maaf" control={<Radio />} label="Maaf, Sepertinya tidak bisa" />
+                <FormControlLabel
+                  value="iya"
+                  control={<Radio />}
+                  label="Iya, saya akan datang"
+                />
+                <FormControlLabel
+                  value="maaf"
+                  control={<Radio />}
+                  label="Maaf, Sepertinya tidak bisa"
+                />
               </RadioGroup>
             </FormControl>
           </Box>
 
-          <Button variant="contained" sx={{ fontWeight: "bold", width: "30%" }}>kirim respon</Button>
+          <Button variant="contained" sx={{ fontWeight: "bold", width: "30%" }}>
+            kirim respon
+          </Button>
         </form>
 
         <div className="mt-5">
@@ -337,14 +445,17 @@ export default function Home() {
             width="100%"
             height="300"
             style={{ border: 0 }}
-            loading="lazy" referrerPolicy="no-referrer-when-downgrade">
-          </iframe>
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
 
           <Button variant="contained" sx={{ width: "100%", marginTop: "20px" }}>
             {/* cari di google maps desktop */}
             <Link
               target="_blank"
-              to={"https://www.google.com/maps/place/6%C2%B023'23.7%22S+106%C2%B039'16.8%22E/@-6.3899227,106.6520867,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-6.389928!4d106.654667?hl=id-ID&entry=ttu"}
+              to={
+                "https://www.google.com/maps/place/6%C2%B023'23.7%22S+106%C2%B039'16.8%22E/@-6.3899227,106.6520867,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-6.389928!4d106.654667?hl=id-ID&entry=ttu"
+              }
               style={{ fontWeight: "bold" }}
             >
               Buka di google maps
@@ -354,11 +465,15 @@ export default function Home() {
       </section>
 
       <section className="max-w-screen-sm mx-auto relative overflow-hidden backdrop-blur-md bg-black/30 py-4 lg:py-10 px-4">
-        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">kirim hadiah</p>
+        <p className="font-bold text-3xl lg:text-4xl tracking-widest pb-5 uppercase">
+          kirim hadiah
+        </p>
 
         <div className="">
           <p>
-            Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
+            Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Dan
+            jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi
+            kado secara cashless.
           </p>
           <FormControl sx={{ width: "100% !important" }}>
             <RadioGroup
@@ -367,7 +482,7 @@ export default function Home() {
               value={value}
               onChange={handleRadioButton}
             >
-              <Box sx={{ display: "flex", justifyContent: "center" }} >
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <FormControlLabel
                   value="qris"
                   control={<Radio />}
@@ -390,7 +505,7 @@ export default function Home() {
             <Box
               component="form"
               sx={{
-                '& .MuiTextField-root': { marginY: 1 },
+                "& .MuiTextField-root": { marginY: 1 },
               }}
               noValidate
               autoComplete="off"
@@ -404,10 +519,12 @@ export default function Home() {
                 />
                 <FilledInput
                   id="filled-adornment-weight"
-                  endAdornment={<InputAdornment position="end">@gmail.com</InputAdornment>}
+                  endAdornment={
+                    <InputAdornment position="end">@gmail.com</InputAdornment>
+                  }
                   aria-describedby="filled-weight-helper-text"
                   inputProps={{
-                    'aria-label': 'weight',
+                    "aria-label": "weight",
                   }}
                   placeholder="Email"
                   fullWidth
@@ -421,7 +538,7 @@ export default function Home() {
                   type="number"
                   InputLabelProps={{ shrink: true }}
                   fullWidth
-                  />
+                />
                 <TextField
                   // error
                   id="filled-textarea"
@@ -442,7 +559,8 @@ export default function Home() {
               <div className="flex">
                 <span id="myInput">0000000000</span>
                 <Button onClick={copyText}>Copy text</Button>
-              </div> <br />
+              </div>{" "}
+              <br />
               a/n Lorem Lorem
             </p>
             <p>
@@ -450,7 +568,8 @@ export default function Home() {
               <div className="flex">
                 <span id="myInput">0000000000</span>
                 <Button onClick={copyText}>Copy text</Button>
-              </div> <br />
+              </div>{" "}
+              <br />
               a/n Lorem Lorem
             </p>
           </div>
@@ -464,7 +583,7 @@ export default function Home() {
             <Box
               component="form"
               sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
               }}
               noValidate
               autoComplete="off"
@@ -520,11 +639,13 @@ export default function Home() {
       <section className="relative w-full h-screen">
         <div className="absolute top-0 right-0">
           <p>
-            Suatu kehormatan dan kebahagiaan bagi kami jika Bapak/Ibu/Saudara/i. Jika berkenan hadir untuk memberikan restu, kami ucapkan terima kasih.
+            Suatu kehormatan dan kebahagiaan bagi kami jika Bapak/Ibu/Saudara/i.
+            Jika berkenan hadir untuk memberikan restu, kami ucapkan terima
+            kasih.
           </p>
           <p>lorem dan Lorem</p>
         </div>
       </section>
-    </Layout >
-  )
+    </Layout>
+  );
 }
