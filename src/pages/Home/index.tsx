@@ -1,7 +1,7 @@
 import CoverLetter from "../../components/CoverLetter";
 import Layout from "../../components/Layout";
 import jumbotron from "../../assets/image/jumbotron.webp";
-import Countdown, { CountdownRenderProps } from "react-countdown";
+import { CountdownRenderProps } from "react-countdown";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,17 +23,17 @@ import FormControl from "@mui/material/FormControl";
 // import FormLabel from '@mui/material/FormLabel';
 // import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 // import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-import Input from "@mui/material/Input";
+// import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
+// import FormHelperText from "@mui/material/FormHelperText";
 import {
   DaunBottomLeft,
   DaunBottomRight,
-  DaunTopLeft,
+  // DaunTopLeft,
   DauntTopRight,
   DaunTopLeftAmplop,
 } from "../../components/Flower.js";
-import bgEnvelope from "../../assets/image/bg-envelope.webp";
+// import bgEnvelope from "../../assets/image/bg-envelope.webp";
 
 interface dataType {
   img: string;
@@ -47,15 +47,9 @@ export default function Home() {
   gsap.registerPlugin(ScrollTrigger);
 
   // set target time
-  const countDownTimer = new Date("2025-04-26T00:00:00");
+  // const countDownTimer = new Date("2025-04-26T00:00:00");
   // start custom style date
-  const renderer = ({
-    days,
-    hours,
-    minutes,
-    seconds,
-    completed,
-  }: CountdownRenderProps) => {
+  ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
     if (completed) {
       // Render completed state
       return <span>Acara telah selesai!</span>;
@@ -222,7 +216,10 @@ export default function Home() {
           <p className="drop-shadow-2xl font-extrabold text-2xl lg:text-5xl font-greatVibes tracking-widest relative">
             <span>Reza Bagus Pratama</span> <br />
           </p>
-          <span className="opacity-70 drop-shadow-xl">Bapak Rizki Widiani & Ibu Sumarmi</span> <br />
+          <span className="opacity-70 drop-shadow-xl">
+            Bapak Rizki Widiani & Ibu Sumarmi
+          </span>{" "}
+          <br />
           {/* <Countdown date={countDownTimer} renderer={renderer}></Countdown> */}
         </div>
         <div className="absolute z-20 bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#7E60BF] to-transparent from-30%">

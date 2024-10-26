@@ -3,7 +3,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../css/main.css";
-import Footer from "../Footer";
+// import Footer from "../Footer";
 
 interface LayoutProps {
   children: ReactNode;

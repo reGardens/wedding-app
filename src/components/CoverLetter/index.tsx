@@ -7,7 +7,7 @@ import gifMusic from "/gif/music.gif";
 import gifPause from "/icon/pause-button.webp";
 import { purple } from "@mui/material/colors";
 import { ButtonProps } from "@mui/base";
-import SendIcon from "@mui/icons-material/Send";
+// import SendIcon from "@mui/icons-material/Send";
 import DraftsIcon from "@mui/icons-material/Drafts";
 
 export default function CoverLetter() {
